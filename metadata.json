@@ -1,0 +1,7 @@
+{
+  "name": "Ohms Lag - Interaktivt Labb",
+  "description": "En interaktiv pedagogisk applikation för årskurs 7 för att lära sig om spänning, ström och resistans genom vattenanalogier och simuleringar.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
