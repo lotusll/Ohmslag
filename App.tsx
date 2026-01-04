@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Section, CircuitState } from './types';
 import { speakText } from './services/speechService';
 import { WaterSimulation } from './components/WaterSimulation';
+import { ShortCircuitVisual } from './components/ShortCircuitVisual';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<Section>(Section.Theory);
@@ -207,23 +208,25 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-red-600 p-8 rounded-3xl text-white relative overflow-hidden">
-              <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
-                <i className="fa-solid fa-triangle-exclamation text-6xl opacity-40"></i>
-                <div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="bg-red-600 p-8 rounded-3xl text-white relative overflow-hidden flex flex-col justify-center">
+                <div className="relative z-10">
+                  <i className="fa-solid fa-triangle-exclamation text-6xl opacity-40 mb-4"></i>
                   <h3 className="text-xl font-bold mb-2">Kortslutning!</h3>
-                  <p className="text-red-100 text-sm">
+                  <p className="text-red-100 text-sm leading-relaxed mb-6">
                     Om resistansen blir noll blir strömmen jättehög jättesnabbt. Det blir så varmt att det kan börja brinna. Tur att vi har säkringar (proppar) som bryter kretsen direkt!
                   </p>
+                  <button 
+                    onClick={() => handleSpeech("Varning! Om motståndet blir noll rusar strömmen iväg och det blir jättevarmt. Det kallas kortslutning och är farligt.")}
+                    className="bg-white text-red-600 px-4 py-2 rounded-full font-bold text-sm whitespace-nowrap inline-flex items-center gap-2 shadow-lg"
+                  >
+                    <i className="fa-solid fa-play"></i> Hör förklaringen
+                  </button>
                 </div>
-                <button 
-                  onClick={() => handleSpeech("Varning! Om motståndet blir noll rusar strömmen iväg och det blir jättevarmt. Det kallas kortslutning och är farligt.")}
-                  className="bg-white text-red-600 px-4 py-2 rounded-full font-bold text-sm whitespace-nowrap"
-                >
-                  <i className="fa-solid fa-play mr-1"></i> Hör varningen
-                </button>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
               </div>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+              
+              <ShortCircuitVisual />
             </div>
           </div>
         )}
