@@ -46,11 +46,12 @@ const App: React.FC = () => {
             </span>
             Ohms Lag
           </h1>
-          <p className="text-slate-500 font-medium">Lär dig hur elektricitet fungerar med vatten!</p>
+          <p className="text-slate-500 font-medium">Lär dig hur elektricitet fungerar!</p>
         </div>
         <div className="flex gap-2">
           <NavButton section={Section.Theory} icon="fa-book-open" label="Teori" />
           <NavButton section={Section.Lab} icon="fa-flask" label="Labbet" />
+          <NavButton section={Section.Functions} icon="fa-gears" label="Funktion" />
           <NavButton section={Section.Protection} icon="fa-shield-halved" label="Skydd" />
           <NavButton section={Section.Summary} icon="fa-check-double" label="Koll" />
         </div>
@@ -176,51 +177,103 @@ const App: React.FC = () => {
           </div>
         )}
 
-        {activeSection === Section.Protection && (
-          <div className="space-y-8 animate-in zoom-in duration-500">
-            <h2 className="text-2xl font-bold text-slate-800">3. Varför behövs motstånd?</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 group hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center text-white mb-4">
-                  <i className="fa-solid fa-fire-burner text-xl"></i>
-                </div>
-                <h3 className="font-bold text-orange-900 text-lg mb-2">Värme och Ljus</h3>
-                <p className="text-orange-800/80 text-sm leading-relaxed">
-                  När strömmen kämpar genom ett motstånd skapas friktion. Det blir varmt! Det är så din brödrost eller en gammal glödlampa fungerar.
-                </p>
-                <button onClick={() => handleSpeech("När strömmen kämpar för att ta sig igenom ett motstånd skapas friktion. Denna friktion blir till energi i form av värme och ljus, som i en brödrost!")} className="mt-4 text-orange-600 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
-                  <i className="fa-solid fa-circle-play"></i> Lyssna
-                </button>
-              </div>
-
-              <div className="bg-purple-50 p-6 rounded-2xl border border-purple-100 group hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center text-white mb-4">
-                  <i className="fa-solid fa-user-shield text-xl"></i>
-                </div>
-                <h3 className="font-bold text-purple-900 text-lg mb-2">Som en dörrvakt</h3>
-                <p className="text-purple-800/80 text-sm leading-relaxed">
-                  En LED-lampa tål inte för mycket ström. Resistansen fungerar som en dörrvakt som ser till att bara lagom mycket ström släpps in.
-                </p>
-                <button onClick={() => handleSpeech("Resistansen fungerar som en dörrvakt. Många apparater skulle brinna upp om vi kopplade dem direkt till ett starkt batteri utan motstånd.")} className="mt-4 text-purple-600 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
-                  <i className="fa-solid fa-circle-play"></i> Lyssna
-                </button>
-              </div>
+        {activeSection === Section.Functions && (
+          <div className="space-y-8 animate-in slide-in-from-left duration-500">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-slate-800">3. Fler funktioner för motstånd</h2>
+              <button 
+                onClick={() => handleSpeech("Motstånd gör mycket mer än bara stoppar el! Det kan dela på spänningen, skapa värme i din brödrost eller hjälpa dig att höja volymen på radion.")}
+                className="text-blue-500"
+              >
+                <i className="fa-solid fa-volume-low text-2xl"></i>
+              </button>
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Voltage Division */}
+              <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                    <i className="fa-solid fa-scissors"></i>
+                  </div>
+                  <h3 className="font-bold text-blue-900">Dela på spänningen</h3>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Om batteriet ger 12V men din lampa bara tål 3V, kan vi använda motstånd för att "dela upp" trycket. Motståndet tar hand om resten av volten så att lampan inte går sönder.
+                </p>
+                <div className="flex items-center gap-2 text-blue-700 font-bold text-xs uppercase">
+                  <i className="fa-solid fa-water"></i> Dela trycket
+                </div>
+              </div>
+
+              {/* Energy Conversion */}
+              <div className="p-6 bg-orange-50 rounded-2xl border border-orange-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white">
+                    <i className="fa-solid fa-sun"></i>
+                  </div>
+                  <h3 className="font-bold text-orange-900">Skapa värme & ljus</h3>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Många apparater använder motstånd för att skapa värme med flit. I en brödrost eller hårtork blir motståndet så varmt att det glöder och värmer upp luften.
+                </p>
+                <div className="flex items-center gap-2 text-orange-700 font-bold text-xs uppercase">
+                  <i className="fa-solid fa-fire"></i> Från el till värme
+                </div>
+              </div>
+
+              {/* Control */}
+              <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+                    <i className="fa-solid fa-sliders"></i>
+                  </div>
+                  <h3 className="font-bold text-indigo-900">Styra ljud & ljus</h3>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Volymknappen på en radio är egentligen ett variabelt motstånd. När du vrider den ändras resistansen, vilket ändrar strömmen till högtalaren.
+                </p>
+                <div className="flex items-center gap-2 text-indigo-700 font-bold text-xs uppercase">
+                  <i className="fa-solid fa-volume-high"></i> Volymkontroll
+                </div>
+              </div>
+
+              {/* Sensors */}
+              <div className="p-6 bg-emerald-50 rounded-2xl border border-emerald-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-white">
+                    <i className="fa-solid fa-eye"></i>
+                  </div>
+                  <h3 className="font-bold text-emerald-900">Känna av omgivningen</h3>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Många sensorer, som de som känner av om det är mörkt eller varmt, fungerar genom att deras motstånd ändras beroende på ljus eller temperatur.
+                </p>
+                <div className="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase">
+                  <i className="fa-solid fa-microchip"></i> Smarta sensorer
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === Section.Protection && (
+          <div className="space-y-8 animate-in zoom-in duration-500">
+            <h2 className="text-2xl font-bold text-slate-800">4. Skydd och Säkerhet</h2>
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="bg-red-600 p-8 rounded-3xl text-white relative overflow-hidden flex flex-col justify-center">
                 <div className="relative z-10">
                   <i className="fa-solid fa-triangle-exclamation text-6xl opacity-40 mb-4"></i>
                   <h3 className="text-xl font-bold mb-2">Kortslutning!</h3>
                   <p className="text-red-100 text-sm leading-relaxed mb-6">
-                    Om resistansen blir noll blir strömmen jättehög jättesnabbt. Det blir så varmt att det kan börja brinna. Tur att vi har säkringar (proppar) som bryter kretsen direkt!
+                    Om resistansen blir nästan noll blir strömmen jättehög jättesnabbt. Det blir så varmt att det kan börja brinna. Tur att vi har säkringar som räddar oss!
                   </p>
                   <button 
                     onClick={() => handleSpeech("Varning! Om motståndet blir noll rusar strömmen iväg och det blir jättevarmt. Det kallas kortslutning och är farligt.")}
                     className="bg-white text-red-600 px-4 py-2 rounded-full font-bold text-sm whitespace-nowrap inline-flex items-center gap-2 shadow-lg"
                   >
-                    <i className="fa-solid fa-play"></i> Hör förklaringen
+                    <i className="fa-solid fa-play"></i> Hör varningen
                   </button>
                 </div>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>

@@ -8,6 +8,7 @@ export interface CircuitState {
 export enum Section {
   Theory = 'Theory',
   Lab = 'Lab',
+  Functions = 'Functions',
   Protection = 'Protection',
   Summary = 'Summary'
 }
